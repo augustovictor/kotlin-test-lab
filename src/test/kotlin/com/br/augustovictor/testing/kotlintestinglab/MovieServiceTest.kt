@@ -10,7 +10,6 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
-import org.springframework.test.context.junit4.SpringRunner
 import java.util.*
 
 @RunWith(MockitoJUnitRunner::class)
