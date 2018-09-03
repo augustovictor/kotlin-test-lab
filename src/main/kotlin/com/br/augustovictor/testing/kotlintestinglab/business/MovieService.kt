@@ -16,4 +16,8 @@ class MovieService {
     fun getAllMovies(): Iterable<Movie> {
         return movieRepository.findAll().map { it -> Movie(it.id, it.title) }
     }
+
+    fun insert(movie: Movie): Movie {
+        return movieRepository.save(movie)
+    }
 }
