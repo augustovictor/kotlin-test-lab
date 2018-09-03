@@ -12,6 +12,6 @@ data class Movie(
         @Id
         @GeneratedValue(generator = "uuid2")
         @GenericGenerator(name="uuid2", strategy = "uuid2")
-        var id: String,
-        var title: String
+        var id: String? = null,
+        var title: String? = null
 )

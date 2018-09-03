@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.RequestBuilder
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import java.util.*
 
 @RunWith(SpringRunner::class)
 @WebMvcTest(MovieController::class)
@@ -45,5 +46,18 @@ class MovieControllerTest {
     fun `should test json values`() {
         val actualResponse = "{id:1, title: \"Item 1\"}"
         JSONAssert.assertEquals("{id:1}", actualResponse, false)
+    }
+
+    @Test
+    fun `should return all movies all`() {
+        Mockito.doReturn(Arrays.asList(Movie("123", "Movie from test"))).`when`(movieService).getAllMovies()
+
+        val request: RequestBuilder = MockMvcRequestBuilders
+                .get("/movies/all")
+                .accept(MediaType.APPLICATION_JSON)
+
+        mockMvc.perform(request)
+                .andExpect(MockMvcResultMatchers.status().isOk)
+                .andExpect(MockMvcResultMatchers.content().json("[{id: \"123\", title: \"Movie from test\"}]"))
     }
 }
