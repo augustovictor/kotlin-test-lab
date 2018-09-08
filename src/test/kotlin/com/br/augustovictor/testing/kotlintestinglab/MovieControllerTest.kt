@@ -6,7 +6,6 @@ import com.br.augustovictor.testing.kotlintestinglab.business.MovieService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
-import org.mockito.Mockito.*
 import org.skyscreamer.jsonassert.JSONAssert
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -31,7 +30,7 @@ class MovieControllerTest {
 
     @Test
     fun `should return a list of movies`() {
-        doReturn(Movie("1", "Item 1")).`when`(movieService).getAll()
+        Mockito.doReturn(Movie("1", "Item 1")).`when`(movieService).getAll()
 
         val request: RequestBuilder = MockMvcRequestBuilders
                 .get("/movies")
@@ -51,7 +50,7 @@ class MovieControllerTest {
 
     @Test
     fun `should return all movies all`() {
-        doReturn(Arrays.asList(Movie("123", "Movie from test"))).`when`(movieService).getAllMovies()
+        Mockito.doReturn(Arrays.asList(Movie("123", "Movie from test"))).`when`(movieService).getAllMovies()
 
         val request: RequestBuilder = MockMvcRequestBuilders
                 .get("/movies/all")
@@ -60,11 +59,5 @@ class MovieControllerTest {
         mockMvc.perform(request)
                 .andExpect(MockMvcResultMatchers.status().isOk)
                 .andExpect(MockMvcResultMatchers.content().json("[{id: \"123\", title: \"Movie from test\"}]"))
-
-        verify(movieService).getAll()
-        verify(movieService, times(1)).getAll()
-        verify(movieService, atLeast(1)).getAll()
-        verify(movieService, atMost(1)).getAll()
-//        verify(movieService, never()).getAll()
     }
 }
