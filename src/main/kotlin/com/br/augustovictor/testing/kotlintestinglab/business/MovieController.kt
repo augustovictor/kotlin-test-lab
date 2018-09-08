@@ -19,6 +19,7 @@ class MovieController {
 
     @GetMapping("/all")
     fun getAllMovies(): Iterable<Movie> {
+        movieService.getAll() // Placed here for spying purposes only
         return movieService.getAllMovies()
     }
 }
